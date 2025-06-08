@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding Fundamentals - Abdul Rauf Jatoi</title>
+    <link type="icon/png" rel="icon" href="media/rauf.jpeg"> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sf': ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-down': 'fadeInDown 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .gradient-bg-1 {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .gradient-bg-2 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-bg-3 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .gradient-bg-4 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .gradient-bg-5 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .gradient-bg-6 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .gradient-bg-7 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .section-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="font-sf bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect bg-white/80 border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-xl font-bold text-gradient">Vibe Coding</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#frontend" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Frontend Fundamentals</a>
+                        <a href="#backend" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Backend with Supabase</a>
+                        <a href="#ai" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">AI Coding</a>
+                        <a href="#tools" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Tools & Flow</a>
+                        <a href="#resources" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">Resources</a>
+                        <a href="#about" class="nav-link text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium">About</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900 focus:outline-none focus:text-gray-900">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-16 left-0 w-full h-screen bg-white/95 glass-effect">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">Home</a>
+                <a href="#frontend" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">Frontend Fundamentals</a>
+                <a href="#backend" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">Backend with Supabase</a>
+                <a href="#ai" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">AI Coding</a>
+                <a href="#tools" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">Tools & Flow</a>
+                <a href="#resources" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">Resources</a>
+                <a href="#about" class="mobile-nav-link block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen gradient-bg-1 flex items-center justify-center pt-16">
+        <div class="text-center px-4">
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-800 mb-4 animate-fade-in-down">
+                Vibe Coding Fundamentals
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-light text-gray-600 animate-fade-in-up" style="animation-delay: 0.2s;">
+                Abdul Rauf Jatoi
+            </h2>
+        </div>
+    </section>
+
+    <!-- Frontend Fundamentals Section -->
+  <section id="frontend" class="min-h-screen gradient-bg-2 flex items-center justify-center py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="section-card bg-white/20 glass-effect rounded-3xl p-8 md:p-12 text-white">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-slide-in-left">Frontend Fundamentals</h2>
+      <p class="text-lg md:text-xl leading-relaxed animate-slide-in-right" style="animation-delay: 0.2s;">
+        Learn how to build fast, clean, and responsive interfaces using React, Vite, Tailwind CSS, and Shadcn. 
+        This stack helps you skip the setup and get straight to building beautiful UIs — fast.
+      </p>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-white/10 rounded-xl p-6 animate-fade-in-up" style="animation-delay: 0.3s;">
+          <i class="fab fa-react text-3xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">React</h3>
+          <p class="text-sm opacity-90">Build reusable components and dynamic UIs with ease.</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-6 animate-fade-in-up" style="animation-delay: 0.5s;">
+          <i class="fas fa-bolt text-3xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Vite</h3>
+          <p class="text-sm opacity-90">A lightning-fast dev environment for React apps.</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-6 animate-fade-in-up" style="animation-delay: 0.7s;">
+          <i class="fas fa-paint-brush text-3xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Tailwind CSS</h3>
+          <p class="text-sm opacity-90">Design directly in markup with utility-first styling.</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-6 animate-fade-in-up" style="animation-delay: 0.9s;">
+          <i class="fas fa-cube text-3xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Shadcn UI</h3>
+          <p class="text-sm opacity-90">Beautiful prebuilt components powered by Tailwind.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Backend with Supabase Section -->
+    <section id="backend" class="min-h-screen gradient-bg-3 flex items-center justify-center py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="section-card bg-white/20 glass-effect rounded-3xl p-8 md:p-12 text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-slide-in-right">Backend with Supabase</h2>
+                <p class="text-lg md:text-xl leading-relaxed animate-slide-in-left" style="animation-delay: 0.2s;">
+                    Coming soon
+                </p>
+                <!--<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <h3 class="text-2xl font-semibold mb-4">Database & Auth</h3>
+                        <ul class="space-y-2 text-lg opacity-90">
+                            <li>• PostgreSQL database</li>
+                            <li>• Row Level Security</li>
+                            <li>• User authentication</li>
+                            <li>• Real-time subscriptions</li>
+                        </ul>
+                    </div>
+                    <div class="animate-fade-in-up" style="animation-delay: 0.6s;">
+                        <h3 class="text-2xl font-semibold mb-4">API & Storage</h3>
+                        <ul class="space-y-2 text-lg opacity-90">
+                            <li>• RESTful APIs</li>
+                            <li>• File storage</li>
+                            <li>• Edge functions</li>
+                            <li>• Database triggers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->
+    </section>
+
+    <!-- AI Coding Section -->
+    <section id="ai" class="min-h-screen gradient-bg-4 flex items-center justify-center py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="section-card bg-white/20 glass-effect rounded-3xl p-8 md:p-12 text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-slide-in-left">AI Coding</h2>
+                <p class="text-lg md:text-xl leading-relaxed animate-slide-in-right" style="animation-delay: 0.2s;">
+                    Coming soon
+                </p>
+                <!--
+                <div class="mt-8 flex flex-wrap gap-4 justify-center">
+                    <div class="bg-white/10 rounded-full px-6 py-3 animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <span class="text-lg font-medium">OpenAI GPT</span>
+                    </div>
+                    <div class="bg-white/10 rounded-full px-6 py-3 animate-fade-in-up" style="animation-delay: 0.5s;">
+                        <span class="text-lg font-medium">Claude AI</span>
+                    </div>
+                    <div class="bg-white/10 rounded-full px-6 py-3 animate-fade-in-up" style="animation-delay: 0.6s;">
+                        <span class="text-lg font-medium">TensorFlow</span>
+                    </div>
+                    <div class="bg-white/10 rounded-full px-6 py-3 animate-fade-in-up" style="animation-delay: 0.7s;">
+                        <span class="text-lg font-medium">Hugging Face</span>
+                    </div>
+                    <div class="bg-white/10 rounded-full px-6 py-3 animate-fade-in-up" style="animation-delay: 0.8s;">
+                        <span class="text-lg font-medium">LangChain</span>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </section>
+
+    <!-- Tools & Flow Section -->
+    <section id="tools" class="min-h-screen gradient-bg-5 flex items-center justify-center py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="section-card bg-white/20 glass-effect rounded-3xl p-8 md:p-12 text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-slide-in-right">Tools & Flow</h2>
+                <p class="text-lg md:text-xl leading-relaxed animate-slide-in-left" style="animation-delay: 0.2s;">
+                    Coming Soon
+                </p> <!--
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <i class="fab fa-git-alt text-4xl mb-3"></i>
+                        <h3 class="text-lg font-semibold">Git & GitHub</h3>
+                    </div>
+                    <div class="text-center animate-fade-in-up" style="animation-delay: 0.5s;">
+                        <i class="fab fa-docker text-4xl mb-3"></i>
+                        <h3 class="text-lg font-semibold">Docker</h3>
+                    </div>
+                    <div class="text-center animate-fade-in-up" style="animation-delay: 0.6s;">
+                        <i class="fas fa-code text-4xl mb-3"></i>
+                        <h3 class="text-lg font-semibold">VS Code</h3>
+                    </div>
+                    <div class="text-center animate-fade-in-up" style="animation-delay: 0.7s;">
+                        <i class="fas fa-cloud text-4xl mb-3"></i>
+                        <h3 class="text-lg font-semibold">Cloud Deploy</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="min-h-screen gradient-bg-6 flex items-center justify-center py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="section-card bg-white/20 glass-effect rounded-3xl p-8 md:p-12 text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-slide-in-left">Resources</h2>
+                <p class="text-lg md:text-xl leading-relaxed animate-slide-in-right" style="animation-delay: 0.2s;">
+                    Access curated learning materials, documentation, and community resources 
+                    to accelerate your coding journey and stay updated with the latest trends.
+                </p>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 rounded-xl p-6 animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <i class="fas fa-book text-3xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Documentation</h3>
+                        <p class="text-sm opacity-90">Comprehensive guides and references</p>
+                    </div>
+                    <div class="bg-white/10 rounded-xl p-6 animate-fade-in-up" style="animation-delay: 0.6s;">
+                        <i class="fas fa-video text-3xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Video Tutorials</h3>
+                        <p class="text-sm opacity-90">Step-by-step video lessons</p>
+                    </div>
+                    <div class="bg-white/10 rounded-xl p-6 animate-fade-in-up" style="animation-delay: 0.8s;">
+                        <i class="fas fa-users text-3xl mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Community</h3>
+                        <p class="text-sm opacity-90">Connect with fellow developers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="min-h-screen gradient-bg-7 flex items-center justify-center py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="section-card bg-white/30 glass-effect rounded-3xl p-8 md:p-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800 animate-fade-in-down">About</h2>
+                <p class="text-lg md:text-xl leading-relaxed text-gray-700 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Welcome to Vibe Coding Fundamentals! This platform is designed to help developers 
+                    master modern web development technologies and best practices. Whether you're a beginner 
+                    or looking to level up your skills, you'll find comprehensive resources and practical 
+                    guidance to build amazing applications.
+                </p>
+                <div class="mt-8 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <img src="media/rauf.jpeg" 
+                         alt="Abdul Rauf Jatoi" 
+                         class="w-40 h-40 full mx-auto mb-4 shadow-lg">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-2">Abdul Rauf Jatoi</h3>
+                    <p class="text-gray-600">Full Stack Developer & AI Student</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-8">
+                <a href="https://youtube.com/@yourchannel" target="_blank" class="inline-block mx-4 text-3xl hover:text-red-500 transition-colors duration-300">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://github.com/yourgithub" target="_blank" class="inline-block mx-4 text-3xl hover:text-gray-400 transition-colors duration-300">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p class="text-gray-400">
+                By <a href="https://raufjatoi.vercel.app" target="_blank" class="text-white hover:text-blue-400 transition-colors duration-300">Abdul Rauf Jatoi</a> – 
+                <a href="https://raufjatoi.vercel.app" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors duration-300">https://raufjatoi.vercel.app</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white/90');
+                nav.classList.remove('bg-white/80');
+            } else {
+                nav.classList.add('bg-white/80');
+                nav.classList.remove('bg-white/90');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('[class*="animate-"]').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+
